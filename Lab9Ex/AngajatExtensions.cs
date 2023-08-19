@@ -8,16 +8,6 @@ namespace Lab9Ex
 {
     static class AngajatExtensions
     {
-        public static void VerificaSalariuPlafon(this Angajat angajat, double salariu)
-        {
-            if (angajat == null)
-            {
-                return;
-            }
-            else if (angajat.Salariu > salariu)
-            {
-                angajat.Afiseaza();
-            }
-        }
+        public static Guid GetId(this Angajat angajat) => angajat.Id;
     }
 }

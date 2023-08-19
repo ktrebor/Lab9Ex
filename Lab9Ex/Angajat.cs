@@ -21,7 +21,7 @@ namespace Lab9Ex
             this.Departament = departament;
         }
 
-        public override string ToString() => $"Nume: {Nume}, ID: {Id}, Salariu: {Salariu}, Department: {Departament}";
+        public override string ToString() => $"{Nume}, ID: {Id}, Salariu: {Salariu}, Department: {Departament}";
         public void Afiseaza() => Console.WriteLine(ToString());
     }
 }

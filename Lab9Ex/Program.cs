@@ -12,6 +12,8 @@ namespace Lab9Ex
             const double minSalary = 7000;
             const double increaseSalaryBy10 = 1.10;
             const double increaseSalaryBy25 = 1.25;
+            const double plafonInferior = 5000;
+            const double plafonSuperior = 6000;
 
             List<Angajat> listaAngajati = new List<Angajat>();
 
@@ -30,7 +32,6 @@ namespace Lab9Ex
             listaAngajati.Add(new Angajat("Ioana", 6960, Department.HumanResources));
             listaAngajati.Add(new Angajat("Zlatan", 3960, Department.HumanResources));
             listaAngajati.Add(new Angajat("Raluca", 6000, Department.Logistics));
-
 
             //lista cu toti angajatii cu salariul mai mare decat valoarea numerica oferita ca parametru
             var noOfWellPayedEmployees = listaAngajati
@@ -119,7 +120,7 @@ namespace Lab9Ex
 
             //Afiseaza „exista” in cazul in care in lista angajatilor exista cel putin un angajat in departamentul Logistics cu salariul intre 5000 si 6000;
             bool logisticsWithRangeExists = listaAngajati
-                .Any(a => a.Departament is Department.Logistics && a.Salariu >= 5000 && a.Salariu<=6000);
+                .Any(a => a.Departament is Department.Logistics && a.Salariu >= plafonInferior && a.Salariu <= plafonSuperior);
             if (logisticsWithRangeExists)
             {
                 Console.WriteLine("Exista");
@@ -128,6 +129,23 @@ namespace Lab9Ex
             {
                 Console.WriteLine("Nu exista");
             }
+
+            //Definiti o lista de 5 departamente si determinati angajatul cu cel mai mare salariu din fiecare departament din lista definita
+            List<Department> listaDepartamente = new List<Department>();
+            listaDepartamente.Add(Department.Development);
+            listaDepartamente.Add(Department.Testing);
+            listaDepartamente.Add(Department.HumanResources);
+            listaDepartamente.Add(Department.Maintenance);
+            listaDepartamente.Add(Department.Logistics);
+
+            var maxSalaryByDepartment = listaDepartamente
+                         .Select(d => listaAngajati
+                             .Where(a => a.Departament == d)
+                             .OrderByDescending(a => a.Salariu)
+                             .FirstOrDefault())
+                         .ToList();
+
+            maxSalaryByDepartment.ForEach(a => a.Afiseaza());
         }
     }
 }
